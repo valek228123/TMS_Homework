@@ -282,6 +282,7 @@ print(string_to_ascii("Programming puzzles!"))
 print(string_to_ascii(""))
 print(string_to_ascii("aA"))
 
+
 # Задача 12.1
 # Определите функцию ascii_to_string, принимающую один пара
 # метр:
@@ -695,8 +696,6 @@ print(is_valid_equation("2+ 3 = 5"))
 print(is_valid_equation("2 +3 = 5"))
 print(is_valid_equation("2 + 3 = 5 0"))
 
-
-
 # Задание 26
 # Определите функцию rotate_list_left, принимающую два параметра:
 # Имя Тип Пример	входа
@@ -714,15 +713,76 @@ print(is_valid_equation("2 + 3 = 5 0"))
 # на 6 должен порождать такой же результат, как циклический
 # сдвиг на 1.
 
-
+# ЗАДАЧУ СНИЗУ ТАК ЖЕ ПРОВЕРЬТЕ
 from typing import Any
-def rotate_list_right(input_list: list[Any], rotate_amount: int)-> list[Any]:
+
+
+def rotate_list_right(input_list: list[Any], rotate_amount: int) -> list[Any]:
     rotate_amount %= len(input_list)
     return input_list[len(input_list) - rotate_amount:] + input_list[:len(input_list) - rotate_amount]
 
-def rotate_list_left(input_list: list[Any], rotate_amount: int)-> list[Any]:
+
+def rotate_list_left(input_list: list[Any], rotate_amount: int) -> list[Any]:
     rotate_amount %= len(input_list)
     return input_list[rotate_amount:] + input_list[:rotate_amount]
+
+
 print(rotate_list_right([1, 2, 3, 4, 5], 2))
 print(rotate_list_left([1, 2, 3, 4, 5], 5))
 print(rotate_list_left([1, 2, 3, 4, 5], 8))
+
+
+# Задение 27
+# Определите функцию find_adjacent_nodes, принимающую два па
+# раметра:
+# Имя Тип
+# adj_matrix список списков int
+# start_node
+# int
+# Пример	входа
+# [[1, 1, 1], [1, 0, 0], [1, 0, 0]]
+# 0
+# Функция должна возвращать список всех вершин, смежных со
+# start_node.
+# Эту задачу можно решить функцией, тело которой содержит все
+# го одну строку. Сможете ли вы найти такое решение?
+
+
+def find_adjacent_nodes(
+        adj_matrix: list[list[int]],
+        start_node: int
+) -> list[int]:
+    return [index for index in range(len(adj_matrix)) if adj_matrix[start_node][index] == 1]
+
+
+print(find_adjacent_nodes([[1, 1, 1], [1, 0, 0], [1, 0, 0]], 0))
+print(find_adjacent_nodes([[1, 1, 1], [1, 0, 0], [1, 0, 0]], 1))
+print(find_adjacent_nodes([[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1,
+                                                                      0]], 1))
+
+
+# Задание 28
+# Определите функцию count_peaks_valleys, принимающую один па
+# раметр:
+# Имя Тип Пример	входа
+# price_action список int
+# [1, 2, 3, 2, 1]
+# Функция должна возвращать кортеж, показывающий, сколько
+# имеется пиков и впадин в заданном движении цены. Кортеж дол
+# жен содержать два целых числа, первое из которых равно числу
+# пиков, а второе – числу впадин.
+
+
+def count_peaks_valleys(price_action: list[int]) -> tuple[int, int]:
+    peaks_valleys = [0, 0]
+    for action in range(1, len(price_action) - 1):
+        if price_action[action - 1] < price_action[action] > price_action[action + 1]:
+            peaks_valleys[0] += 1
+        elif price_action[action - 1] > price_action[action] < price_action[action + 1]:
+            peaks_valleys[1] += 1
+    return tuple(peaks_valleys)
+
+
+print(count_peaks_valleys([1, 2, 3, 2, 1]))
+print(count_peaks_valleys([1, 2, 3, 2, 1, 2]))
+print(count_peaks_valleys([7, 6, 5, 10, 11, 12, 10, 9, 10]))
