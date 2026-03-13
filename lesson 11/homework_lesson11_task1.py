@@ -30,7 +30,7 @@ class Truck(Auto):
                  color: str = None,
                  weight: float = None,
                  ):
-        super().__init__(brand, age, mark, color,weight)
+        super().__init__(brand, age, mark, color, weight)
         self.max_load = max_load
 
     def move(self):
@@ -42,6 +42,7 @@ class Truck(Auto):
         print("load")
         time.sleep(1)
 
+
 class Car(Auto):
     def __init__(self, brand: str,
                  age: int,
@@ -50,12 +51,13 @@ class Car(Auto):
                  color: str = None,
                  weight: float = None,
                  ):
-        super().__init__(brand, age, mark, color,weight)
+        super().__init__(brand, age, mark, color, weight)
         self.max_speed = max_speed
 
     def move(self):
         super().move()
         print(f"max speed if {self.max_speed}")
+
 
 truck1 = Truck("Volvo", 5, "FH16", 20000, "red", 8000)
 truck2 = Truck("Scania", 3, "R500", 15000, "blue", 7500)
@@ -70,15 +72,17 @@ print(truck1.age)
 car1.move()
 car2.stop()
 
-#Task 3
+# Task 3
 
-from abc import ABC,abstractmethod
+from abc import ABC, abstractmethod
+
 
 class Shape(ABC):
 
     @abstractmethod
     def area(self):
         pass
+
 
 class Point():
     def __init__(self, x: int = 0, y: int = 0):
@@ -87,15 +91,16 @@ class Point():
 
 
 class Circle(Shape):
-    def __init__(self,radius: float):
+    def __init__(self, radius: float):
         self.radius = radius
+
     def area(self):
         return math.pi * self.radius ** 2
 
-    def __add__(self,other):
+    def __add__(self, other):
         return self.radius + other.radius
 
-    def __sub__(self,other):
+    def __sub__(self, other):
         return Point() if self.radius == other.radius else self.radius - other.radius
 
 
