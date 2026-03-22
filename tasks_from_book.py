@@ -786,3 +786,73 @@ def count_peaks_valleys(price_action: list[int]) -> tuple[int, int]:
 print(count_peaks_valleys([1, 2, 3, 2, 1]))
 print(count_peaks_valleys([1, 2, 3, 2, 1, 2]))
 print(count_peaks_valleys([7, 6, 5, 10, 11, 12, 10, 9, 10]))
+
+
+# Task 29
+# Определите функцию tap_code_to_english, принимающую один па
+# раметр:
+# Имя Тип Пример	входа
+# input_code str ".. ... .. .... .. ... .. ...."
+# Серьезные задачи  57
+# Функция должна возвращать закодированное предложение. Эле
+# менты внутри строки должны быть представлены следующим об
+# разом:
+# буквы: 1–5 точек, за которыми следует пробел, и далее еще
+# 1–5 точек, например «. ..» = «b»;
+# конец буквы и начало новой буквы: два пробела, например
+# «. ..  . ..» = «bb»;
+# конец слова и начало нового слова: три пробела, например
+# «.. …  .. ….   .. …  .. ….» = «hi hi».
+
+
+
+tap_code_map = {
+    "a": ". .",
+    "b": ". ..",
+    "c": ". ...",
+    "d": ". ....",
+    "e": ". .....",
+    "f": ".. .",
+    "g": ".. ..",
+    "h": ".. ...",
+    "i": ".. ....",
+    "j": ".. .....",
+    "l": "... .",
+    "m": "... ..",
+    "n": "... ...",
+    "o": "... ....",
+    "p": "... .....",
+    "q": ".... .",
+    "r": ".... ..",
+    "s": ".... ...",
+    "t": ".... ....",
+    "u": ".... .....",
+    "v": "..... .",
+    "w": "..... ..",
+    "x": "..... ...",
+    "y": "..... ....",
+    "z": "..... .....",
+}
+def tap_code_to_english(input_code: str) -> str:
+    if not input_code:
+        return ""
+    corrent_code = ""
+    corrent_map = {}
+    for letter,value in tap_code_map.items():
+        corrent_map[value] = letter
+    words = input_code.split("   ")
+    letters = [word.split("  ") for word in words]
+    for word in letters:
+        if corrent_code:
+            corrent_code += " "
+        for letter in word:
+            corrent_code += corrent_map[letter]
+    return corrent_code
+
+
+
+
+
+print(tap_code_to_english(".. ...  .. ....   .. ...  .. ...."))
+print(tap_code_to_english(". ...  ... ....  ... ....  ... ."))
+print(tap_code_to_english(""))
